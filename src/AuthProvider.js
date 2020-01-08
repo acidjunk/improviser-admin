@@ -8,7 +8,7 @@ export default (type, params) => {
             method: 'POST',
             body: JSON.stringify({ email: username, password }),
             credentials: 'include',
-            headers: new Headers({ 'Content-Type': 'application/json' }),
+            headers: new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': "https://admin.improviser.education" }),
         })
         return fetch(request)
             .then(response => {

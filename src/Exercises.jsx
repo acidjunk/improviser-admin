@@ -33,11 +33,11 @@ import Chip from "@material-ui/core/Chip";
 import MaterialList from "@material-ui/core/List";
 import CardActions from "@material-ui/core/CardActions";
 
-export const RiffIcon = MusicNote;
+export const ExerciseIcon = MusicNote;
 
 
-const riffRowStyle = (record, index) => ({
-    backgroundColor: record.render_valid === true ? 'white' : 'orange',
+const exerciseRowStyle = (record, index) => ({
+    backgroundColor: record.is_public === true ? 'palegreen' : 'white',
 });
 
 const TagsField = ({ record }) =>
@@ -45,51 +45,48 @@ const TagsField = ({ record }) =>
 
 TagsField.defaultProps = { addLabel: true };
 
-const SVGField = ({ record }) =>
-    <img src={record.image}/>;
+// const SVGField = ({ record }) =>
+//     <img src={record.image}/>;
+//
+// SVGField.defaultProps = { addLabel: true };
 
-SVGField.defaultProps = { addLabel: true };
 
-
-const RiffFilter = props => (
+const ExerciseFilter = props => (
     <Filter {...props}>
         <TextInput label="Search" source="q" alwaysOn />
-        <BooleanInput source="rendered" />
     </Filter>
 );
 
-const RiffPagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />;
+const ExercisePagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />;
 
-export const RiffList = props => (
+export const ExerciseList = props => (
     <List
         {...props}
         sort={{ field: "name", order: "ASC" }}
-        filters={<RiffFilter />}
-        pagination={<RiffPagination />}
+        filters={<ExerciseFilter />}
+        pagination={<ExercisePagination />}
         perPage={50}
     >
-        <Datagrid rowClick="show" rowStyle={riffRowStyle}>
+        <Datagrid rowClick="show" rowStyle={exerciseRowStyle}>
             <TextField source="name" />
-            <NumberField source="number_of_bars" />
-            <BooleanField source="render_valid" />
             {/*<TextField source="image_info" sortable={false} />*/}
             <TagsField/>
-            <DateField source="created_date" />
-            <SVGField/>
+            <DateField source="created_at" />
+            {/*<SVGField/>*/}
         </Datagrid>
     </List>
 );
 
-const RiffTitle = ({ record }) => {
-    return <span>Riff: {record ? `"${record.name}"` : ""}</span>;
+const ExerciseTitle = ({ record }) => {
+    return <span>Exercise: {record ? `"${record.name}"` : ""}</span>;
 };
 
 const AddTagButton = ({ record }) => (
     <Button
         component={Link}
         to={{
-            pathname: "/riffs-to-tags/create",
-            search: `?riff_id=${record ? record.id : ""}`
+            pathname: "/exercises-to-tags/create",
+            search: `?exercise_id=${record ? record.id : ""}`
         }}
         label="Add a tag"
     >
@@ -97,10 +94,10 @@ const AddTagButton = ({ record }) => (
     </Button>
 );
 
-const RiffShowActions = ({ basePath, data }) => (
+const ExerciseShowActions = ({ basePath, data }) => (
     <CardActions>
         <ListButton basePath={basePath} />
-        <EditButton basePath="/riffs" record={data} />
+        <EditButton basePath="/exercises" record={data} />
         <AddTagButton record={data} />
     </CardActions>
 );
@@ -113,7 +110,7 @@ const ShowSide = ({ record }) => (
                 {record.tags.map(tag => (
                     <ListItem>
                         {tag.name}
-                        <EditButton basePath="/riffs-to-tags" record={tag} />
+                        <EditButton basePath="/exercises-to-tags" record={tag} />
                     </ListItem>
                 ))}
             </MaterialList>
@@ -121,45 +118,35 @@ const ShowSide = ({ record }) => (
     </div>
 );
 
-export const RiffShow = props => (
-    <Show title={<RiffTitle />} aside={<ShowSide />} actions={<RiffShowActions />} {...props}>
+export const ExerciseShow = props => (
+    <Show title={<ExerciseTitle />} aside={<ShowSide />} actions={<ExerciseShowActions />} {...props}>
         <SimpleShowLayout>
             <TextField source="id" />
             <TextField source="name" />
-            <BooleanField source="render_valid" />
-            <TextField source="image_info" sortable={false} />
             <ArrayField source="tags" sortable={false}>
                 <SingleFieldList>
                     <ChipField source="name" />
                 </SingleFieldList>
             </ArrayField>
-            <DateField source="created_date" />
+            <DateField source="created_at" />
         </SimpleShowLayout>
     </Show>
 );
 
-export const RiffEdit = props => (
-    <Edit title={<RiffTitle />} {...props}>
+export const ExerciseEdit = props => (
+    <Edit title={<ExerciseTitle />} {...props}>
         <SimpleForm>
             <DisabledInput source="id" />
             <TextInput source="name" validate={required()} />
-            <BooleanInput source="render_valid" />
         </SimpleForm>
     </Edit>
 );
 
-export const RiffCreate = props => (
-    <Create title="Create a Riff" {...props}>
+export const ExerciseCreate = props => (
+    <Create title="Create a Exercise" {...props}>
         <SimpleForm>
             <TextInput source="name" validate={required()} />
-            <TextInput source="short_description_nl" />
-            <LongTextInput source="description_nl" />
-            <TextInput source="short_description_en" />
-            <LongTextInput source="description_en" />
-            <BooleanInput source="c" />
-            <BooleanInput source="h" />
-            <BooleanInput source="i" />
-            <BooleanInput source="s" />
+            <TextInput source="description" />
         </SimpleForm>
     </Create>
 );

@@ -7,6 +7,7 @@ import AuthProvider from "./AuthProvider";
 import englishMessages from "./i18n/en";
 import {TagCreate, TagEdit, TagIcon, TagList} from "./Tags";
 import {RiffCreate, RiffEdit, RiffIcon, RiffList, RiffShow} from "./Riffs";
+import {ExerciseCreate, ExerciseEdit, ExerciseIcon, ExerciseList, ExerciseShow} from "./Exercises";
 import {UserCreate, UserEdit, UserIcon, UserList} from "./Users";
 import apiUrl from "./Constants";
 import addUploadFeature from "./dataProvider/decorator";
@@ -50,6 +51,14 @@ class App extends Component {
                     create={RiffCreate}
                     show={RiffShow}
                     icon={RiffIcon}
+                />
+                <Resource
+                    name="exercises"
+                    list={ExerciseList}
+                    edit={ExerciseEdit}
+                    create={ExerciseCreate}
+                    show={ExerciseShow}
+                    icon={ExerciseIcon}
                 />
                 {/*<Resource*/}
                 {/*    name="exercises"*/}
