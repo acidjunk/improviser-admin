@@ -42,7 +42,7 @@ const exerciseRowStyle = (record, index) => ({
 });
 
 const TagsField = ({ record }) =>
-  record.tags.map(item => <Chip key={item} label={item}/>);
+  record.tags.map(item => <Chip key={item.id} label={item.name}/>);
 
 TagsField.defaultProps = { addLabel: true };
 
@@ -124,11 +124,6 @@ export const ExerciseShow = props => (
         <SimpleShowLayout>
             <TextField source="id" />
             <TextField source="name" />
-            <ArrayField source="tags" sortable={false}>
-                <SingleFieldList>
-                    <ChipField source="name" />
-                </SingleFieldList>
-            </ArrayField>
             <DateField source="created_at" />
         </SimpleShowLayout>
     </Show>

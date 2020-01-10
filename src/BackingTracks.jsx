@@ -1,6 +1,9 @@
 import { Label, LibraryMusic } from "@material-ui/icons";
 import React from "react";
 import {
+  BooleanInput,
+  BooleanField,
+  DateField,
   Create,
   Datagrid,
   DisabledInput,
@@ -11,6 +14,7 @@ import {
   Filter,
   List,
   NumberField,
+  NumberInput,
   SimpleForm,
   TextField,
   TextInput,
@@ -28,9 +32,12 @@ export const BackingTrackList = props => (
   <List {...props} perPage="25" filters={<BackingTrackFilter />}>
     <Datagrid>
       <TextField source="name" />
+      <TextField source="chord_info" />
       <NumberField source="tempo" />
       <TextField source="file" />
       <EditButton basePath="/backing-tracks" />
+      <DateField source="modified_at"/>
+      <DateField source="approved_at"/>
     </Datagrid>
   </List>
 );
@@ -44,10 +51,12 @@ export const BackingTrackEdit = props => (
     <SimpleForm>
       <DisabledInput source="id" />
       <TextInput source="name" validate={required()} />
-      <TextInput source="chord_info" validate={required()} />
+      <NumberInput source="tempo" validate={required()} step={5} />
+      <TextInput source="chord_info" />
       <FileInput source="file" label="Backing track (mp3)" accept="audio/mp3">
         <FileField source="src" title="title" />
       </FileInput>
+      <BooleanInput source="approved" />
     </SimpleForm>
   </Edit>
 );
@@ -56,7 +65,8 @@ export const BackingTrackCreate = props => (
   <Create title="Create a Backing Track" {...props}>
     <SimpleForm>
       <TextInput source="name" validate={required()} />
-      <TextInput source="chord_info" validate={required()} />
+      <NumberInput source="tempo" validate={required()} defaultValue={100} step={5} />
+      <TextInput source="chord_info" />
       <FileInput source="file" label="Backing track (mp3)" accept="audio/mp3">
         <FileField source="src" title="title" />
       </FileInput>

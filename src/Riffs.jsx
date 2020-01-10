@@ -41,7 +41,7 @@ const riffRowStyle = (record, index) => ({
 });
 
 const TagsField = ({ record }) =>
-  record.tags.map(item => <Chip key={item} label={item}/>);
+  record.tags.map(item => <Chip key={item.id} label={item.name}/>);
 
 TagsField.defaultProps = { addLabel: true };
 
@@ -74,7 +74,7 @@ export const RiffList = props => (
             <BooleanField source="render_valid" />
             {/*<TextField source="image_info" sortable={false} />*/}
             <TagsField/>
-            <DateField source="created_date" />
+            <DateField source="created_at" />
             <SVGField/>
         </Datagrid>
     </List>
@@ -107,7 +107,7 @@ const RiffShowActions = ({ basePath, data }) => (
 
 const ShowSide = ({ record }) => (
     <div style={{ width: 350, margin: "1em" }}>
-        <Typography variant="title">Effects</Typography>
+        <Typography variant="title">Tags</Typography>
         {record && (
             <MaterialList>
                 {record.tags.map(tag => (
@@ -127,12 +127,7 @@ export const RiffShow = props => (
             <TextField source="id" />
             <TextField source="name" />
             <BooleanField source="render_valid" />
-            <TextField source="image_info" sortable={false} />
-            <ArrayField source="tags" sortable={false}>
-                <SingleFieldList>
-                    <ChipField source="name" />
-                </SingleFieldList>
-            </ArrayField>
+            <TextField source="image_info" />
             <DateField source="created_date" />
         </SimpleShowLayout>
     </Show>
