@@ -9,11 +9,9 @@ const convertFileToBase64 = file => new Promise((resolve, reject) => {
 
 const addUploadFeature = requestHandler => (type, resource, params) => {
 
-    if (type === 'UPDATE' && resource === 'backing-tracks') {
-        debugger;
+    if ((type === 'UPDATE' || type === 'CREATE') && resource === 'backing-tracks') {
         if (params.data.file && params.data.file.hasOwnProperty("src")) {
 
-            // NEW CODE HERE (to upload just one file):
             const file = params.data.file;
             if ( !file.rawFile instanceof File ){
                 return Promise.reject('Error: Not a file...'); // Didn't test this...
