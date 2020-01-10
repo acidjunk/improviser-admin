@@ -26,14 +26,15 @@ import {
     TextField,
     TextInput
 } from "react-admin";
-import { Add, MusicNote } from "@material-ui/icons";
+import { Add, SportsEsports } from "@material-ui/icons";
 import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
 import Chip from "@material-ui/core/Chip";
 import MaterialList from "@material-ui/core/List";
 import CardActions from "@material-ui/core/CardActions";
 
-export const ExerciseIcon = MusicNote;
+
+export const ExerciseIcon = SportsEsports;
 
 
 const exerciseRowStyle = (record, index) => ({

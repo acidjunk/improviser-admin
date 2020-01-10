@@ -24,7 +24,6 @@ const TagFilter = props => (
 export const TagList = props => (
     <List {...props} perPage="25" filters={<TagFilter />}>
         <Datagrid>
-            <TextField source="id" />
             <TextField source="name" validate={required()} />
             <EditButton basePath="/tags" />
         </Datagrid>
@@ -32,7 +31,7 @@ export const TagList = props => (
 );
 
 const TagTitle = ({ record }) => {
-    return <span>Effect {record ? `"${record.name}"` : ""}</span>;
+    return <span>Tag {record ? `"${record.name}"` : ""}</span>;
 };
 
 export const TagEdit = props => (

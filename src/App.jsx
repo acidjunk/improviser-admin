@@ -11,6 +11,7 @@ import {ExerciseCreate, ExerciseEdit, ExerciseIcon, ExerciseList, ExerciseShow} 
 import {UserCreate, UserEdit, UserIcon, UserList} from "./Users";
 import apiUrl from "./Constants";
 import addUploadFeature from "./dataProvider/decorator";
+import {BackingTrackCreate, BackingTrackEdit, BackingTrackIcon, BackingTrackList} from "./BackingTracks";
 
 
 const i18nProvider = locale => {
@@ -60,13 +61,14 @@ class App extends Component {
                     show={ExerciseShow}
                     icon={ExerciseIcon}
                 />
-                {/*<Resource*/}
-                {/*    name="exercises"*/}
-                {/*    list={RiffList}*/}
-                {/*    edit={RiffEdit}*/}
-                {/*    create={RiffCreate}*/}
-                {/*    icon={RiffIcon}*/}
-                {/*/>               */}
+                <Resource
+                    name="backing-tracks"
+                    list={BackingTrackList}
+                    edit={BackingTrackEdit}
+                    create={BackingTrackCreate}
+                    // show={BackingTrackShow}
+                    icon={BackingTrackIcon}
+                />
                 <Resource
                     name="tags"
                     list={TagList}
