@@ -13,8 +13,9 @@ export default {
         },
         dashboard: {
             new_users: 'New Users',
-            new_kinds: 'New Product Kinds',
-            shops: 'Shops',
+            new_riffs: 'Last added riffs',
+            new_exercises: 'Last added exercises',
+            riffs: 'Riffs',
 
         },
         menu: {

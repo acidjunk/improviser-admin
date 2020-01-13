@@ -24,6 +24,7 @@ import { RiffsToTagsCreate, RiffsToTagsEdit } from "./RiffsToTags";
 import { TagCreate, TagEdit, TagIcon, TagList } from "./Tags";
 import { UserCreate, UserEdit, UserIcon, UserList } from "./Users";
 import { ExercisesToTagsCreate, ExercisesToTagsEdit } from "./ExercisesToTags";
+import Dashboard from "./dashboard/Dashboard";
 
 const i18nProvider = locale => {
   if (locale === "nl") {
@@ -53,7 +54,7 @@ class App extends Component {
         dataProvider={uploadDataProvider}
         title="iMproviser Admin"
         authProvider={AuthProvider}
-        // dashboard={Dashboard}
+        dashboard={Dashboard}
         i18nProvider={i18nProvider}
       >
         <Resource
