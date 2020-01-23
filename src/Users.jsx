@@ -1,30 +1,33 @@
+import { AccountCircle } from "@material-ui/icons";
 import React from "react";
 import {
-    required,
-    List,
+    Create,
     Datagrid,
+    DateField,
+    DateInput,
     DisabledInput,
     Edit,
-    Create,
-    SimpleForm,
-    DateField,
     Filter,
+    List,
+    LongTextInput,
+    Pagination,
+    SimpleForm,
     TextField,
     TextInput,
-    LongTextInput,
-    DateInput
+    required
 } from "react-admin";
-import { AccountCircle } from "@material-ui/icons";
 export const UserIcon = AccountCircle;
 
-const UserFilter = (props) => (
+const UserFilter = props => (
     <Filter {...props}>
         <TextInput label="Search" source="q" alwaysOn />
     </Filter>
 );
 
+const UserPagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />;
+
 export const UserList = props => (
-    <List {...props} filters={<UserFilter/>}>
+    <List {...props} filters={<UserFilter />} pagination={<UserPagination />} perPage={50}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="username" />

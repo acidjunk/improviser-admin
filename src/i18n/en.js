@@ -12,9 +12,9 @@ export default {
             dark: 'Dark',
         },
         dashboard: {
-            new_users: 'New Users',
-            new_riffs: 'Last added riffs',
-            new_exercises: 'Last added exercises',
+            new_users: 'Recent added users',
+            new_riffs: 'Recent added riffs',
+            new_exercises: 'Recent added exercises',
             riffs: 'Riffs',
 
         },

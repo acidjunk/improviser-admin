@@ -76,7 +76,7 @@ const NewExercises = ({ exercises = [], nb, translate, classes }) => (
                                         className={classes.inline}
                                         color="textPrimary"
                                     >
-                                      {/*{`${record.created_at} - Public ${record.public}`}*/}
+                                      {`${record.created_at} - ${record.is_public ? "public" : "private"} - ${record.description}`}
 
                                     </Typography>
                                 </React.Fragment>

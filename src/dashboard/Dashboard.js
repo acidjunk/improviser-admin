@@ -63,7 +63,7 @@ class Dashboard extends Component {
                 // created_at_gte: aMonthAgo.toISOString(),
             },
             sort: { field: "created_at", order: "DESC" },
-            pagination: { page: 1, perPage: 10 }
+            pagination: { page: 1, perPage: 15 }
         });
         this.setState({
             newRiffs,
