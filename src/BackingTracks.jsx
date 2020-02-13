@@ -6,6 +6,7 @@ import {
     Create,
     Datagrid,
     DateField,
+    DeleteButton,
     DisabledInput,
     Edit,
     EditButton,
@@ -15,6 +16,7 @@ import {
     List,
     NumberField,
     NumberInput,
+    ShowButton,
     SimpleForm,
     TextField,
     TextInput,
@@ -30,14 +32,16 @@ const BackingTrackFilter = props => (
 
 export const BackingTrackList = props => (
     <List {...props} perPage="25" filters={<BackingTrackFilter />}>
-        <Datagrid>
+        <Datagrid rowClick="show">
             <TextField source="name" />
             <TextField source="chord_info" />
             <NumberField source="tempo" />
             <TextField source="file" />
-            <EditButton basePath="/backing-tracks" />
             <DateField source="modified_at" />
             <DateField source="approved_at" />
+            <ShowButton />
+            <EditButton />
+            <DeleteButton />
         </Datagrid>
     </List>
 );

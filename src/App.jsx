@@ -13,6 +13,7 @@ import englishMessages from "./i18n/en";
 import { RiffCreate, RiffEdit, RiffIcon, RiffList, RiffShow } from "./Riffs";
 import { RiffsToTagsCreate, RiffsToTagsEdit } from "./RiffsToTags";
 import { TagCreate, TagEdit, TagIcon, TagList, TagShow } from "./Tags";
+import { adminTheme } from "./Theme";
 import { UserCreate, UserEdit, UserIcon, UserList } from "./Users";
 
 const i18nProvider = locale => {
@@ -45,6 +46,7 @@ class App extends Component {
                 authProvider={AuthProvider}
                 dashboard={Dashboard}
                 i18nProvider={i18nProvider}
+                theme={adminTheme}
             >
                 <Resource
                     name="riffs"

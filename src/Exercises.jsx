@@ -8,7 +8,6 @@ import React from "react";
 import {
     BooleanField,
     Button,
-    ChipField,
     Create,
     Datagrid,
     DateField,
@@ -24,6 +23,7 @@ import {
     ReferenceField,
     ReferenceManyField,
     Show,
+    ShowButton,
     SimpleForm,
     Tab,
     TabbedShowLayout,
@@ -31,8 +31,6 @@ import {
     TextInput,
     required
 } from "react-admin";
-
-import { getRiffSVGName } from "./utils/utils";
 
 export const ExerciseIcon = SportsEsports;
 
@@ -82,6 +80,9 @@ export const ExerciseList = props => (
             <TagsField />
             <DateField source="created_at" />
             <DateField source="modified_at" />
+            <ShowButton />
+            <EditButton />
+            <DeleteButton />
 
             {/*<SVGField/>*/}
         </Datagrid>

@@ -23,6 +23,7 @@ import {
     ReferenceField,
     ReferenceManyField,
     Show,
+    ShowButton,
     SimpleForm,
     Tab,
     TabbedShowLayout,
@@ -81,6 +82,9 @@ export const RiffList = props => (
             <TagsField />
             <DateField source="created_at" />
             <SVGField />
+            <ShowButton />
+            <EditButton />
+            <DeleteButton />
         </Datagrid>
     </List>
 );

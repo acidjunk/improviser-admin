@@ -36,10 +36,11 @@ const TagTitle = ({ record }) => {
 
 export const TagList = props => (
     <List {...props} perPage="25" filters={<TagFilter />}>
-        <Datagrid>
+        <Datagrid rowClick="show">
             <TextField source="name" validate={required()} />
-            <ShowButton basePath="/tags" />
-            <EditButton basePath="/tags" />
+            <ShowButton />
+            <EditButton />
+            <DeleteButton />
         </Datagrid>
     </List>
 );
