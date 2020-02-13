@@ -3,11 +3,9 @@ import Chip from "@material-ui/core/Chip";
 import { Add, MusicNote } from "@material-ui/icons";
 import React from "react";
 import {
-    ArrayField,
     BooleanField,
     BooleanInput,
     Button,
-    ChipField,
     Create,
     Datagrid,
     DateField,
@@ -16,7 +14,6 @@ import {
     Edit,
     EditButton,
     Filter,
-    Label,
     Link,
     List,
     ListButton,
@@ -27,8 +24,6 @@ import {
     ReferenceManyField,
     Show,
     SimpleForm,
-    SimpleShowLayout,
-    SingleFieldList,
     Tab,
     TabbedShowLayout,
     TextField,
@@ -51,7 +46,7 @@ TagsField.defaultProps = { addLabel: true };
 const SVGField = ({ record }) => <img src={record.image} />;
 SVGField.defaultProps = { addLabel: true };
 
-const AllSVGField = ({ record, octave }) => {
+const AllSVGFields = ({ record, octave }) => {
     const notes = ["c", "d", "e", "f"];
     return notes.map(note => (
         <React.Fragment>
@@ -60,7 +55,7 @@ const AllSVGField = ({ record, octave }) => {
         </React.Fragment>
     ));
 };
-AllSVGField.defaultProps = { addLabel: true };
+AllSVGFields.defaultProps = { addLabel: true };
 
 const RiffFilter = props => (
     <Filter {...props}>
@@ -124,6 +119,7 @@ export const RiffShow = props => (
                 <TextField source="id" />
                 <BooleanField source="render_valid" />
                 <TextField source="name" />
+                <TagsField label="Tags" />
                 <TextField source="notes" />
                 <TextField source="number_of_bars" />
                 <SVGField label="Image" />
@@ -145,10 +141,10 @@ export const RiffShow = props => (
             </Tab>
             <Tab label="Images">
                 <h2>Images</h2>
-                <AllSVGField label="Octave -1" octave={-1} style={{ float: "left" }} />
-                <AllSVGField label="Octave 0" octave={0} style={{ float: "left" }} />
-                <AllSVGField label="Octave 1" octave={1} style={{ float: "left" }} />
-                <AllSVGField label="Octave 2" octave={1} style={{ float: "left" }} />
+                <AllSVGFields label="Octave -1" octave={-1} style={{ float: "left" }} />
+                <AllSVGFields label="Octave 0" octave={0} style={{ float: "left" }} />
+                <AllSVGFields label="Octave 1" octave={1} style={{ float: "left" }} />
+                <AllSVGFields label="Octave 2" octave={1} style={{ float: "left" }} />
             </Tab>
         </TabbedShowLayout>
     </Show>

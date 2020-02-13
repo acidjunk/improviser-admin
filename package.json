@@ -41,7 +41,7 @@
     }
   },
   "pre-commit": [
-    "prettier",
+    "prettier"
   ],
   "browserslist": {
     "production": [
