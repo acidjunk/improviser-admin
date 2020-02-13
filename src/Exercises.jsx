@@ -1,6 +1,14 @@
+import CardActions from "@material-ui/core/CardActions";
+import Chip from "@material-ui/core/Chip";
+import MaterialList from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import Typography from "@material-ui/core/Typography";
+import { Add, SportsEsports } from "@material-ui/icons";
 import React from "react";
 import {
     ArrayField,
+    BooleanField,
+    BooleanInput,
     Button,
     ChipField,
     Create,
@@ -14,35 +22,24 @@ import {
     List,
     ListButton,
     LongTextInput,
-    SingleFieldList,
-    BooleanField,
-    BooleanInput,
     NumberField,
-    required,
+    Pagination,
     Show,
     SimpleForm,
     SimpleShowLayout,
-    Pagination,
+    SingleFieldList,
     TextField,
-    TextInput
+    TextInput,
+    required
 } from "react-admin";
-import { Add, SportsEsports } from "@material-ui/icons";
-import Typography from "@material-ui/core/Typography";
-import ListItem from "@material-ui/core/ListItem";
-import Chip from "@material-ui/core/Chip";
-import MaterialList from "@material-ui/core/List";
-import CardActions from "@material-ui/core/CardActions";
-
 
 export const ExerciseIcon = SportsEsports;
 
-
 const exerciseRowStyle = (record, index) => ({
-    backgroundColor: record.is_public === true ? 'palegreen' : 'white',
+    backgroundColor: record.is_public === true ? "palegreen" : "white"
 });
 
-const TagsField = ({ record }) =>
-  record.tags.map(item => <Chip key={item.id} label={item.name}/>);
+const TagsField = ({ record }) => record.tags.map(item => <Chip key={item.id} label={item.name} />);
 
 TagsField.defaultProps = { addLabel: true };
 
@@ -50,7 +47,6 @@ TagsField.defaultProps = { addLabel: true };
 //     <img src={record.image}/>;
 //
 // SVGField.defaultProps = { addLabel: true };
-
 
 const ExerciseFilter = props => (
     <Filter {...props}>
@@ -71,7 +67,7 @@ export const ExerciseList = props => (
         <Datagrid rowClick="show" rowStyle={exerciseRowStyle}>
             <TextField source="name" />
             {/*<TextField source="image_info" sortable={false} />*/}
-            <TagsField/>
+            <TagsField />
             <DateField source="created_at" />
             {/*<SVGField/>*/}
         </Datagrid>

@@ -1,55 +1,66 @@
+import CardActions from "@material-ui/core/CardActions";
+import Chip from "@material-ui/core/Chip";
+import { Add, MusicNote } from "@material-ui/icons";
 import React from "react";
 import {
     ArrayField,
+    BooleanField,
+    BooleanInput,
     Button,
     ChipField,
     Create,
     Datagrid,
     DateField,
+    DeleteButton,
     DisabledInput,
     Edit,
     EditButton,
     Filter,
+    Label,
     Link,
     List,
     ListButton,
     LongTextInput,
-    SingleFieldList,
-    BooleanField,
-    BooleanInput,
     NumberField,
-    required,
+    Pagination,
+    ReferenceField,
+    ReferenceManyField,
     Show,
     SimpleForm,
     SimpleShowLayout,
-    Pagination,
+    SingleFieldList,
+    Tab,
+    TabbedShowLayout,
     TextField,
-    TextInput
+    TextInput,
+    required
 } from "react-admin";
-import { Add, MusicNote } from "@material-ui/icons";
-import Typography from "@material-ui/core/Typography";
-import ListItem from "@material-ui/core/ListItem";
-import Chip from "@material-ui/core/Chip";
-import MaterialList from "@material-ui/core/List";
-import CardActions from "@material-ui/core/CardActions";
+
+import { getRiffSVGName } from "./utils/utils";
 
 export const RiffIcon = MusicNote;
 
-
 const riffRowStyle = (record, index) => ({
-    backgroundColor: record.render_valid === true ? 'white' : 'orange',
+    backgroundColor: record.render_valid === true ? "white" : "orange"
 });
 
-const TagsField = ({ record }) =>
-  record.tags.map(item => <Chip key={item.id} label={item.name}/>);
+const TagsField = ({ record }) => record.tags.map(item => <Chip key={item.id} label={item.name} />);
 
 TagsField.defaultProps = { addLabel: true };
 
-const SVGField = ({ record }) =>
-    <img src={record.image}/>;
-
+const SVGField = ({ record }) => <img src={record.image} />;
 SVGField.defaultProps = { addLabel: true };
 
+const AllSVGField = ({ record, octave }) => {
+    const notes = ["c", "d", "e", "f"];
+    return notes.map(note => (
+        <React.Fragment>
+            <img src={getRiffSVGName(record.image, note, octave)} />
+            <span style={{ marginLeft: "-5px" }}>{note}</span>
+        </React.Fragment>
+    ));
+};
+AllSVGField.defaultProps = { addLabel: true };
 
 const RiffFilter = props => (
     <Filter {...props}>
@@ -73,9 +84,9 @@ export const RiffList = props => (
             <NumberField source="number_of_bars" />
             <BooleanField source="render_valid" />
             {/*<TextField source="image_info" sortable={false} />*/}
-            <TagsField/>
+            <TagsField />
             <DateField source="created_at" />
-            <SVGField/>
+            <SVGField />
         </Datagrid>
     </List>
 );
@@ -105,31 +116,41 @@ const RiffShowActions = ({ basePath, data }) => (
     </CardActions>
 );
 
-const ShowSide = ({ record }) => (
-    <div style={{ width: 350, margin: "1em" }}>
-        <Typography variant="title">Tags</Typography>
-        {record && (
-            <MaterialList>
-                {record.tags.map(tag => (
-                    <ListItem>
-                        {tag.name}
-                        <EditButton basePath="/riffs-to-tags" record={tag} />
-                    </ListItem>
-                ))}
-            </MaterialList>
-        )}
-    </div>
-);
-
 export const RiffShow = props => (
-    <Show title={<RiffTitle />} aside={<ShowSide />} actions={<RiffShowActions />} {...props}>
-        <SimpleShowLayout>
-            <TextField source="id" />
-            <TextField source="name" />
-            <BooleanField source="render_valid" />
-            <TextField source="image_info" />
-            <DateField source="created_date" />
-        </SimpleShowLayout>
+    <Show title={<RiffTitle />} actions={<RiffShowActions />} {...props}>
+        <TabbedShowLayout>
+            <Tab label="summary">
+                <h2>Riff Summary</h2>
+                <TextField source="id" />
+                <BooleanField source="render_valid" />
+                <TextField source="name" />
+                <TextField source="notes" />
+                <TextField source="number_of_bars" />
+                <SVGField label="Image" />
+                <DateField source="created_at" />
+                <DateField source="render_date" />
+                <TextField source="image_info" />
+            </Tab>
+            <Tab label="Tags" path="riffs-to-tags">
+                <h2>Tags</h2>
+                <ReferenceManyField reference="riffs-to-tags" target="riff_id" addLabel={false}>
+                    <Datagrid>
+                        <ReferenceField source="tag_id" reference="tags">
+                            <TextField source="name" />
+                        </ReferenceField>
+                        <EditButton />
+                        <DeleteButton />
+                    </Datagrid>
+                </ReferenceManyField>
+            </Tab>
+            <Tab label="Images">
+                <h2>Images</h2>
+                <AllSVGField label="Octave -1" octave={-1} style={{ float: "left" }} />
+                <AllSVGField label="Octave 0" octave={0} style={{ float: "left" }} />
+                <AllSVGField label="Octave 1" octave={1} style={{ float: "left" }} />
+                <AllSVGField label="Octave 2" octave={1} style={{ float: "left" }} />
+            </Tab>
+        </TabbedShowLayout>
     </Show>
 );
 

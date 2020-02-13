@@ -6,7 +6,7 @@ An admin interface for the iMproviser featuring:
     - Views to manage, filter, seacrh and edit exercises
     - Views to upload, manage, filter, seacrh and edit background tracks
     - Views to manage, filter, seacrh and edit users
- 
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 Info about updating the deps and stuff can be found in the create react app docs.
 
