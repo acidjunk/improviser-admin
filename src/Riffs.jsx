@@ -40,7 +40,6 @@ const riffRowStyle = (record, index) => ({
 });
 
 const TagsField = ({ record }) => record.tags.map(item => <Chip key={item.id} label={item.name} />);
-
 TagsField.defaultProps = { addLabel: true };
 
 const SVGField = ({ record }) => <img src={record.image} />;

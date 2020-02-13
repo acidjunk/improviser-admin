@@ -66,7 +66,7 @@ const AllRiffs = ({ record }) => {
         />
     ));
 };
-AllRiffs.defaultProps = { addLabel: true };
+AllRiffs.defaultProps = { addLabel: false };
 
 export const ExerciseList = props => (
     <List
@@ -139,7 +139,7 @@ export const ExerciseShow = props => (
             </Tab>
             <Tab label="Riffs" path="riffs">
                 <h2>Riffs used in this exercise</h2>
-                <AllRiffs label="All Riffs" />
+                <AllRiffs />
             </Tab>
         </TabbedShowLayout>
     </Show>
