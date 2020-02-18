@@ -3,6 +3,7 @@ import Chip from "@material-ui/core/Chip";
 import { Add, MusicNote } from "@material-ui/icons";
 import React from "react";
 import {
+    AutocompleteInput,
     BooleanField,
     BooleanInput,
     Button,
@@ -17,7 +18,6 @@ import {
     Link,
     List,
     ListButton,
-    LongTextInput,
     NumberField,
     Pagination,
     ReferenceField,
@@ -36,6 +36,8 @@ import { getRiffSVGName } from "./utils/utils";
 
 export const RiffIcon = MusicNote;
 
+const numberOfBarsChoices = [{ name: "1" }, { name: "2" }, { name: "3" }, { name: "4" }];
+
 const riffRowStyle = (record, index) => ({
     backgroundColor: record.render_valid === true ? "white" : "orange"
 });
@@ -43,7 +45,7 @@ const riffRowStyle = (record, index) => ({
 const TagsField = ({ record }) => record.tags.map(item => <Chip key={item.id} label={item.name} />);
 TagsField.defaultProps = { addLabel: true };
 
-const SVGField = ({ record }) => <img src={record.image} />;
+const SVGField = ({ record }) => <img height="75%" src={getRiffSVGName(record.image, "c", 0)} />;
 SVGField.defaultProps = { addLabel: true };
 
 const AllSVGFields = ({ record, octave }) => {
@@ -159,6 +161,7 @@ export const RiffEdit = props => (
             <DisabledInput source="id" />
             <TextInput source="name" validate={required()} />
             <BooleanInput source="render_valid" />
+            <TextInput source="notes" validate={required()} fullWidth />
         </SimpleForm>
     </Edit>
 );
@@ -167,14 +170,13 @@ export const RiffCreate = props => (
     <Create title="Create a Riff" {...props}>
         <SimpleForm>
             <TextInput source="name" validate={required()} />
-            <TextInput source="short_description_nl" />
-            <LongTextInput source="description_nl" />
-            <TextInput source="short_description_en" />
-            <LongTextInput source="description_en" />
-            <BooleanInput source="c" />
-            <BooleanInput source="h" />
-            <BooleanInput source="i" />
-            <BooleanInput source="s" />
+            <TextInput source="notes" validate={required()} />
+            <AutocompleteInput
+                source="number_of_bars"
+                choices={numberOfBarsChoices}
+                optionText="name"
+                optionValue="name"
+            />
         </SimpleForm>
     </Create>
 );
