@@ -32,24 +32,41 @@ import {
     required
 } from "react-admin";
 
+import RenderInvalidButton from "./components/RenderInvalidButton";
 import { getRiffSVGName } from "./utils/utils";
 
 export const RiffIcon = MusicNote;
 
 const numberOfBarsChoices = [{ name: "1" }, { name: "2" }, { name: "3" }, { name: "4" }];
 
+const redirect = (basePath, id, data) => {
+    return `/riffs/${data.id}/show/riffs-to-tags`;
+};
 const riffRowStyle = (record, index) => ({
-    backgroundColor: record.render_valid === true ? "white" : "orange"
+    backgroundColor: record.render_valid === true ? "white" : "#FFEBEE"
 });
 
-const TagsField = ({ record }) => record.tags.map(item => <Chip key={item.id} label={item.name} />);
+const TagsField = ({ record }) => {
+    if (!record.tags) {
+        return null;
+    }
+    return record.tags.map(item => <Chip key={item.id} label={item.name} />);
+};
 TagsField.defaultProps = { addLabel: true };
 
-const SVGField = ({ record }) => <img height="75%" src={getRiffSVGName(record.image, "c", 0)} />;
+const SVGField = ({ record }) => {
+    if (!record.image) {
+        return null;
+    }
+    return record.render_valid ? <img height="75%" src={getRiffSVGName(record.image, "c", 0)} /> : <div>N/A</div>;
+};
 SVGField.defaultProps = { addLabel: true };
 
 const AllSVGFields = ({ record, octave }) => {
     const notes = ["c", "d", "e", "f"];
+    if (!record.render_valid) {
+        return <div>N/A</div>;
+    }
     return notes.map(note => (
         <React.Fragment>
             <img src={getRiffSVGName(record.image, note, octave)} />
@@ -62,7 +79,7 @@ AllSVGFields.defaultProps = { addLabel: true };
 const RiffFilter = props => (
     <Filter {...props}>
         <TextInput label="Search" source="q" alwaysOn />
-        <BooleanInput source="rendered" />
+        <BooleanInput source="render_valid" />
     </Filter>
 );
 
@@ -71,14 +88,15 @@ const RiffPagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100
 export const RiffList = props => (
     <List
         {...props}
-        sort={{ field: "name", order: "ASC" }}
+        sort={{ field: "created_at", order: "DESC" }}
         filters={<RiffFilter />}
         pagination={<RiffPagination />}
-        perPage={50}
+        perPage={25}
     >
         <Datagrid rowClick="show" rowStyle={riffRowStyle}>
             <TextField source="name" />
             <NumberField source="number_of_bars" />
+            <TextField source="chord" />
             <BooleanField source="render_valid" />
             {/*<TextField source="image_info" sortable={false} />*/}
             <TagsField />
@@ -113,6 +131,7 @@ const RiffShowActions = ({ basePath, data }) => (
         <ListButton basePath={basePath} />
         <EditButton basePath="/riffs" record={data} />
         <AddTagButton record={data} />
+        <RenderInvalidButton record={data} />
     </CardActions>
 );
 
@@ -127,6 +146,9 @@ export const RiffShow = props => (
                 <TagsField label="Tags" />
                 <TextField source="notes" />
                 <TextField source="number_of_bars" />
+                <TextField source="chord" />
+                <BooleanField source="multi_chord" />
+                <TextField source="chord_info" />
                 <SVGField label="Image" />
                 <DateField source="created_at" />
                 <DateField source="render_date" />
@@ -157,10 +179,20 @@ export const RiffShow = props => (
 
 export const RiffEdit = props => (
     <Edit title={<RiffTitle />} {...props}>
-        <SimpleForm>
+        <SimpleForm redirect="list">
             <DisabledInput source="id" />
             <TextInput source="name" validate={required()} />
             <BooleanInput source="render_valid" />
+            <TextInput source="number_of_bars" />
+            <TextInput source="chord" validate={required()} />
+            <TextInput source="chord_info" />
+            <BooleanInput source="multi_chord" />
+            {/*<AutocompleteInput*/}
+            {/*  source="number_of_bars"*/}
+            {/*  choices={numberOfBarsChoices}*/}
+            {/*  optionText="name"*/}
+            {/*  optionValue="name"*/}
+            {/*/>*/}
             <TextInput source="notes" validate={required()} fullWidth />
         </SimpleForm>
     </Edit>
@@ -168,9 +200,12 @@ export const RiffEdit = props => (
 
 export const RiffCreate = props => (
     <Create title="Create a Riff" {...props}>
-        <SimpleForm>
+        <SimpleForm redirect={redirect}>
             <TextInput source="name" validate={required()} />
-            <TextInput source="notes" validate={required()} />
+            <TextInput source="notes" validate={required()} fullWidth />
+            <TextInput source="chord" validate={required()} />
+            <TextInput source="chord_info" />
+            <BooleanInput source="multi_chord" />
             <AutocompleteInput
                 source="number_of_bars"
                 choices={numberOfBarsChoices}

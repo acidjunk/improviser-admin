@@ -4,9 +4,8 @@ import { Admin, Resource, fetchUtils } from "react-admin";
 
 import AuthProvider from "./AuthProvider";
 import { BackingTrackCreate, BackingTrackEdit, BackingTrackIcon, BackingTrackList } from "./BackingTracks";
-import apiUrl from "./Constants";
 import Dashboard from "./dashboard/Dashboard";
-import addUploadFeature from "./dataProvider/decorator";
+import { uploadDataProvider } from "./dataProvider";
 import { ExerciseCreate, ExerciseEdit, ExerciseIcon, ExerciseList, ExerciseShow } from "./Exercises";
 import { ExercisesToTagsCreate, ExercisesToTagsEdit } from "./ExercisesToTags";
 import englishMessages from "./i18n/en";
@@ -24,18 +23,6 @@ const i18nProvider = locale => {
     // Always fallback on english
     return englishMessages;
 };
-
-const httpClient = (url, options = {}) => {
-    if (!options.headers) {
-        options.headers = new Headers({ Accept: "application/json" });
-    }
-    // Setup cookie auth
-    options.credentials = "include";
-    return fetchUtils.fetchJson(url, options);
-};
-
-const dataProvider = simpleRestProvider(`${apiUrl}/v1`, httpClient);
-const uploadDataProvider = addUploadFeature(dataProvider);
 
 class App extends Component {
     render() {

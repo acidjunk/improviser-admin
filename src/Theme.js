@@ -5,7 +5,7 @@ import { createMuiTheme } from "@material-ui/core/styles";
 export const adminTheme = createMuiTheme({
     palette: {
         primary: {
-            main: "#311b92"
+            main: "#4527A0"
         },
         secondary: {
             main: "#b71c1c"

@@ -2,11 +2,17 @@ import CardActions from "@material-ui/core/CardActions";
 import Chip from "@material-ui/core/Chip";
 import MaterialList from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
 import { Add, SportsEsports } from "@material-ui/icons";
 import React from "react";
 import {
     BooleanField,
+    BooleanInput,
     Button,
     Create,
     Datagrid,
@@ -35,27 +41,22 @@ import {
 export const ExerciseIcon = SportsEsports;
 
 const exerciseRowStyle = (record, index) => ({
-    backgroundColor: record.is_public === true ? "palegreen" : "white"
+    backgroundColor: record.is_public === true ? "#E8F5E9" : "white"
 });
 
 const TagsField = ({ record }) => record.tags.map(item => <Chip key={item.id} label={item.name} />);
 TagsField.defaultProps = { addLabel: true };
 
-// const SVGField = ({ record }) =>
-//     <img src={record.image}/>;
-//
-// SVGField.defaultProps = { addLabel: true };
-
 const ExerciseFilter = props => (
     <Filter {...props}>
         <TextInput label="Search" source="q" alwaysOn />
+        <BooleanInput source="is_public" defaultValue={true} />
     </Filter>
 );
 
 const ExercisePagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />;
 
 const AllRiffs = ({ record }) => {
-    // const suffix = record.riff.octave ? "" : "";
     return record.exercise_items.map(riff => (
         <img
             src={`https://www.improviser.education/static/rendered/120/riff_${riff.riff_id}_${riff.pitch}${
@@ -66,25 +67,52 @@ const AllRiffs = ({ record }) => {
 };
 AllRiffs.defaultProps = { addLabel: false };
 
+const AllChords = ({ record }) => {
+    const rows = record.exercise_items.map(riff => (
+        <TableRow>
+            <TableCell component="th" scope="row">
+                {riff.order_number + 1}
+            </TableCell>
+            <TableCell>{riff.number_of_bars}</TableCell>
+            <TableCell>{riff.chord_info}</TableCell>
+            <TableCell>{riff.chord_info_alternate}</TableCell>
+            <TableCell>{riff.chord_info_backing_track}</TableCell>
+        </TableRow>
+    ));
+    return (
+        <Table style={{ maxWidth: "700px" }}>
+            <TableHead>
+                <TableRow>
+                    <TableCell numeric>Number</TableCell>
+                    <TableCell>Number of bars</TableCell>
+                    <TableCell>Chord Info</TableCell>
+                    <TableCell>Alternate Chord Info</TableCell>
+                    <TableCell>Backing-track Chord Info</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>{rows}</TableBody>
+        </Table>
+    );
+};
+AllChords.defaultProps = { addLabel: false };
+
 export const ExerciseList = props => (
     <List
         {...props}
-        sort={{ field: "name", order: "ASC" }}
+        sort={{ field: "modified_at", order: "DESC" }}
         filters={<ExerciseFilter />}
         pagination={<ExercisePagination />}
         perPage={50}
     >
         <Datagrid rowClick="show" rowStyle={exerciseRowStyle}>
             <TextField source="name" />
-            {/*<TextField source="image_info" sortable={false} />*/}
             <TagsField />
+            <BooleanField source="is_public" />
             <DateField source="created_at" />
             <DateField source="modified_at" />
             <ShowButton />
             <EditButton />
             <DeleteButton />
-
-            {/*<SVGField/>*/}
         </Datagrid>
     </List>
 );
@@ -138,6 +166,10 @@ export const ExerciseShow = props => (
                     </Datagrid>
                 </ReferenceManyField>
             </Tab>
+            <Tab label="Chords" path="chords">
+                <h2>Chord list</h2>
+                <AllChords />
+            </Tab>
             <Tab label="Riffs" path="riffs">
                 <h2>Riffs used in this exercise</h2>
                 <AllRiffs />
@@ -151,6 +183,7 @@ export const ExerciseEdit = props => (
         <SimpleForm>
             <DisabledInput source="id" />
             <TextInput source="name" validate={required()} />
+            <BooleanField source="is_public" />
         </SimpleForm>
     </Edit>
 );
