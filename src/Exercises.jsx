@@ -73,6 +73,9 @@ const AllChords = ({ record }) => {
             <TableCell component="th" scope="row">
                 {riff.order_number + 1}
             </TableCell>
+            <TableCell>
+                <Link to={`/riffs/${riff.riff_id}/`}>{riff.riff_id}</Link>
+            </TableCell>
             <TableCell>{riff.number_of_bars}</TableCell>
             <TableCell>{riff.chord_info}</TableCell>
             <TableCell>{riff.chord_info_alternate}</TableCell>
@@ -84,6 +87,7 @@ const AllChords = ({ record }) => {
             <TableHead>
                 <TableRow>
                     <TableCell numeric>Number</TableCell>
+                    <TableCell numeric>Riff</TableCell>
                     <TableCell>Number of bars</TableCell>
                     <TableCell>Chord Info</TableCell>
                     <TableCell>Alternate Chord Info</TableCell>
