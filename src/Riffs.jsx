@@ -184,7 +184,7 @@ export const RiffEdit = props => (
             <TextInput source="name" validate={required()} />
             <BooleanInput source="render_valid" />
             <TextInput source="number_of_bars" />
-            <TextInput source="chord" validate={required()} />
+            <TextInput source="chord" />
             <TextInput source="chord_info" />
             <BooleanInput source="multi_chord" />
             {/*<AutocompleteInput*/}
@@ -203,7 +203,7 @@ export const RiffCreate = props => (
         <SimpleForm redirect={redirect}>
             <TextInput source="name" validate={required()} />
             <TextInput source="notes" validate={required()} fullWidth />
-            <TextInput source="chord" validate={required()} />
+            <TextInput source="chord" />
             <TextInput source="chord_info" />
             <BooleanInput source="multi_chord" />
             <AutocompleteInput
