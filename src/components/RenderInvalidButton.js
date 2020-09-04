@@ -25,7 +25,7 @@ class RenderInvalidButton extends Component {
     };
 
     render() {
-        return <Button label="Approve" onClick={this.handleClick} />;
+        return <Button onClick={this.handleClick}>Approve</Button>;
     }
 }
 
