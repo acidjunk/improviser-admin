@@ -181,9 +181,15 @@ export const RiffEdit = props => (
     <Edit title={<RiffTitle />} {...props}>
         <SimpleForm redirect="list">
             <DisabledInput source="id" />
-            <TextInput source="name" validate={required()} />
             <BooleanInput source="render_valid" />
-            <TextInput source="number_of_bars" />
+            <TextInput source="name" validate={required()} />
+            <TextInput source="notes" validate={required()} fullWidth />
+            <AutocompleteInput
+                source="number_of_bars"
+                choices={numberOfBarsChoices}
+                optionText="name"
+                optionValue="name"
+            />
             <TextInput source="chord" />
             <TextInput source="chord_info" />
             <BooleanInput source="multi_chord" />
@@ -193,7 +199,6 @@ export const RiffEdit = props => (
             {/*  optionText="name"*/}
             {/*  optionValue="name"*/}
             {/*/>*/}
-            <TextInput source="notes" validate={required()} fullWidth />
         </SimpleForm>
     </Edit>
 );
@@ -202,16 +207,16 @@ export const RiffCreate = props => (
     <Create title="Create a Riff" {...props}>
         <SimpleForm redirect={redirect}>
             <TextInput source="name" validate={required()} />
-            <TextInput source="notes" validate={required()} fullWidth />
-            <TextInput source="chord" />
-            <TextInput source="chord_info" />
-            <BooleanInput source="multi_chord" />
             <AutocompleteInput
                 source="number_of_bars"
                 choices={numberOfBarsChoices}
                 optionText="name"
                 optionValue="name"
             />
+            <TextInput source="notes" validate={required()} fullWidth />
+            <TextInput source="chord" />
+            <TextInput source="chord_info" />
+            <BooleanInput source="multi_chord" />
         </SimpleForm>
     </Create>
 );
