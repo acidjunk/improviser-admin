@@ -1,11 +1,11 @@
 import { AUTH_ERROR, AUTH_LOGIN, AUTH_LOGOUT } from "react-admin";
 
-import apiUrl from "./Constants";
+import API_URL from "./Constants";
 
 export default (type, params) => {
     if (type === AUTH_LOGIN) {
         const { username, password } = params;
-        const request = new Request(`${apiUrl}/login`, {
+        const request = new Request(`${API_URL}/login`, {
             method: "POST",
             body: JSON.stringify({ email: username, password }),
             credentials: "include",

@@ -143,12 +143,12 @@ export const RiffShow = props => (
                 <TextField source="id" />
                 <BooleanField source="render_valid" />
                 <TextField source="name" />
-                <TagsField label="Tags" />
                 <TextField source="notes" />
                 <TextField source="number_of_bars" />
                 <TextField source="chord" />
-                <BooleanField source="multi_chord" />
                 <TextField source="chord_info" />
+                <BooleanField source="multi_chord" />
+                <TagsField label="Tags" />
                 <SVGField label="Image" />
                 <DateField source="created_at" />
                 <DateField source="render_date" />
@@ -193,12 +193,6 @@ export const RiffEdit = props => (
             <TextInput source="chord" />
             <TextInput source="chord_info" />
             <BooleanInput source="multi_chord" />
-            {/*<AutocompleteInput*/}
-            {/*  source="number_of_bars"*/}
-            {/*  choices={numberOfBarsChoices}*/}
-            {/*  optionText="name"*/}
-            {/*  optionValue="name"*/}
-            {/*/>*/}
         </SimpleForm>
     </Edit>
 );
@@ -207,13 +201,13 @@ export const RiffCreate = props => (
     <Create title="Create a Riff" {...props}>
         <SimpleForm redirect={redirect}>
             <TextInput source="name" validate={required()} />
+            <TextInput source="notes" validate={required()} fullWidth />
             <AutocompleteInput
                 source="number_of_bars"
                 choices={numberOfBarsChoices}
                 optionText="name"
                 optionValue="name"
             />
-            <TextInput source="notes" validate={required()} fullWidth />
             <TextInput source="chord" />
             <TextInput source="chord_info" />
             <BooleanInput source="multi_chord" />

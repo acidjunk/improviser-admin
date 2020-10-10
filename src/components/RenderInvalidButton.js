@@ -6,7 +6,7 @@ import { UPDATE } from "react-admin";
 import { connect } from "react-redux";
 import { push as pushAction } from "react-router-redux";
 
-import apiUrl from "../Constants";
+import API_URL from "../Constants";
 import { uploadDataProvider } from "../dataProvider";
 
 class RenderInvalidButton extends Component {

@@ -1,4 +1,3 @@
-const apiUrl = "http://localhost:5000";
-//const apiUrl = "https://api.improviser.education";
+const API_URL = process.env.NODE_ENV === "development" ? "http://localhost:5000" : "https://api.improviser.education";
 
-export default apiUrl;
+export default API_URL;
