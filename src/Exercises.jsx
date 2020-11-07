@@ -1,13 +1,10 @@
 import CardActions from "@material-ui/core/CardActions";
 import Chip from "@material-ui/core/Chip";
-import MaterialList from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Typography from "@material-ui/core/Typography";
 import { Add, SportsEsports } from "@material-ui/icons";
 import React from "react";
 import {
@@ -40,7 +37,7 @@ import {
 
 export const ExerciseIcon = SportsEsports;
 
-const exerciseRowStyle = (record, index) => ({
+const exerciseRowStyle = record => ({
     backgroundColor: record.is_public === true ? "#E8F5E9" : "white"
 });
 
@@ -59,6 +56,7 @@ const ExercisePagination = props => <Pagination rowsPerPageOptions={[10, 25, 50,
 const AllRiffs = ({ record }) => {
     return record.exercise_items.map(riff => (
         <img
+            alt={`riff-${riff.riff_id}`}
             src={`https://www.improviser.education/static/rendered/120/riff_${riff.riff_id}_${riff.pitch}${
                 riff.octave ? `_${riff.octave}` : ""
             }.png`}
@@ -186,7 +184,7 @@ export const ExerciseEdit = props => (
     <Edit title={<ExerciseTitle />} {...props}>
         <SimpleForm>
             <DisabledInput source="id" />
-            <TextInput source="name" validate={required()} />
+            <TextInput source="name" validate={required()} fullWidth autoFocus />
             <BooleanField source="is_public" />
         </SimpleForm>
     </Edit>
@@ -195,8 +193,8 @@ export const ExerciseEdit = props => (
 export const ExerciseCreate = props => (
     <Create title="Create a Exercise" {...props}>
         <SimpleForm>
-            <TextInput source="name" validate={required()} />
-            <TextInput source="description" />
+            <TextInput source="name" validate={required()} fullWidth autoFocus />
+            <TextInput source="description" fullWidth />
         </SimpleForm>
     </Create>
 );

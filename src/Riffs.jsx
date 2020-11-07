@@ -58,7 +58,11 @@ const SVGField = ({ record }) => {
     if (!record.image) {
         return null;
     }
-    return record.render_valid ? <img height="75%" src={getRiffSVGName(record.image, "c", 0)} /> : <div>N/A</div>;
+    return record.render_valid ? (
+        <img alt={`riff-${record.name}`} height="75%" src={getRiffSVGName(record.image, "c", 0)} />
+    ) : (
+        <div>N/A</div>
+    );
 };
 SVGField.defaultProps = { addLabel: true };
 
@@ -69,7 +73,7 @@ const AllSVGFields = ({ record, octave }) => {
     }
     return notes.map(note => (
         <React.Fragment>
-            <img src={getRiffSVGName(record.image, note, octave)} />
+            <img alt={`riff-${record.name}`} src={getRiffSVGName(record.image, note, octave)} />
             <span style={{ marginLeft: "-5px" }}>{note}</span>
         </React.Fragment>
     ));
@@ -182,7 +186,7 @@ export const RiffEdit = props => (
         <SimpleForm redirect="list">
             <DisabledInput source="id" />
             <BooleanInput source="render_valid" />
-            <TextInput source="name" validate={required()} />
+            <TextInput source="name" validate={required()} fullWidth autoFocus />
             <TextInput source="notes" validate={required()} fullWidth />
             <AutocompleteInput
                 source="number_of_bars"
@@ -200,7 +204,7 @@ export const RiffEdit = props => (
 export const RiffCreate = props => (
     <Create title="Create a Riff" {...props}>
         <SimpleForm redirect={redirect}>
-            <TextInput source="name" validate={required()} />
+            <TextInput source="name" validate={required()} fullWidth autoFocus />
             <TextInput source="notes" validate={required()} fullWidth />
             <AutocompleteInput
                 source="number_of_bars"

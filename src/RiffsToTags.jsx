@@ -1,9 +1,6 @@
-import { Link } from "@material-ui/icons";
 import { parse } from "query-string";
 import React from "react";
-import { Create, DisabledInput, Edit, ReferenceInput, SelectInput, SimpleForm, TextInput, required } from "react-admin";
-
-export const RiffsToTagsIcon = Link;
+import { Create, DisabledInput, Edit, ReferenceInput, SelectInput, SimpleForm, required } from "react-admin";
 
 const RiffsToTagsTitle = ({ record }) => {
     return <span>RiffsToTags {record ? `"${record.id}"` : ""}</span>;
@@ -15,7 +12,7 @@ export const RiffsToTagsEdit = props => (
     <Edit title={<RiffsToTagsTitle />} {...props}>
         <SimpleForm redirect={redirect}>
             <DisabledInput source="id" />
-            <ReferenceInput source="tag_id" reference="tags" perPage={100} validate={required()}>
+            <ReferenceInput source="tag_id" reference="tags" perPage={100} validate={required()} autoFocus>
                 <SelectInput optionText="name" />
             </ReferenceInput>
         </SimpleForm>
@@ -31,7 +28,7 @@ export const RiffsToTagsCreate = props => {
                 <ReferenceInput source="riff_id" reference="riffs" perPage={100} validate={required()}>
                     <SelectInput optionText="name" />
                 </ReferenceInput>
-                <ReferenceInput source="tag_id" reference="tags" perPage={100} validate={required()}>
+                <ReferenceInput source="tag_id" reference="tags" perPage={100} validate={required()} autoFocus>
                     <SelectInput optionText="name" />
                 </ReferenceInput>
             </SimpleForm>

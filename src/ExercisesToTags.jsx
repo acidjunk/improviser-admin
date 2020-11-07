@@ -1,9 +1,6 @@
-import { Link } from "@material-ui/icons";
 import { parse } from "query-string";
 import React from "react";
-import { Create, DisabledInput, Edit, ReferenceInput, SelectInput, SimpleForm, TextInput, required } from "react-admin";
-
-export const ExercisesToTagsIcon = Link;
+import { Create, DisabledInput, Edit, ReferenceInput, SelectInput, SimpleForm, required } from "react-admin";
 
 const ExercisesToTagsTitle = ({ record }) => {
     return <span>ExercisesToTags {record ? `"${record.id}"` : ""}</span>;
@@ -16,7 +13,7 @@ export const ExercisesToTagsEdit = props => (
     <Edit title={<ExercisesToTagsTitle />} {...props}>
         <SimpleForm redirect={redirect}>
             <DisabledInput source="id" />
-            <ReferenceInput source="tag_id" reference="tags" perPage={100} validate={required()}>
+            <ReferenceInput source="tag_id" reference="tags" perPage={100} validate={required()} autoFocus>
                 <SelectInput optionText="name" />
             </ReferenceInput>
         </SimpleForm>
@@ -32,7 +29,7 @@ export const ExercisesToTagsCreate = props => {
                 <ReferenceInput source="exercise_id" reference="exercises" perPage={100} validate={required()}>
                     <SelectInput optionText="name" />
                 </ReferenceInput>
-                <ReferenceInput source="tag_id" reference="tags" perPage={100} validate={required()}>
+                <ReferenceInput source="tag_id" reference="tags" perPage={100} validate={required()} autoFocus>
                     <SelectInput optionText="name" />
                 </ReferenceInput>
             </SimpleForm>

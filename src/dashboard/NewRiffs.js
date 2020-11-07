@@ -72,7 +72,7 @@ const NewRiffs = ({ riffs = [], nb, translate, classes }) => (
                                             </Typography>
                                         </React.Fragment>
                                         <div>
-                                            <img src={record.image} />
+                                            <img alt={`riff-${record.name}`} src={record.image} />
                                         </div>
                                     </div>
                                 }

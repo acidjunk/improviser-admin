@@ -1,6 +1,5 @@
-import simpleRestProvider from "ra-data-simple-rest";
 import React, { Component } from "react";
-import { Admin, Resource, fetchUtils } from "react-admin";
+import { Admin, Resource } from "react-admin";
 
 import AuthProvider from "./AuthProvider";
 import { BackingTrackCreate, BackingTrackEdit, BackingTrackIcon, BackingTrackList } from "./BackingTracks";

@@ -1,7 +1,6 @@
-import { Label, LibraryMusic } from "@material-ui/icons";
+import { LibraryMusic } from "@material-ui/icons";
 import React from "react";
 import {
-    BooleanField,
     BooleanInput,
     Create,
     Datagrid,
@@ -54,9 +53,9 @@ export const BackingTrackEdit = props => (
     <Edit title={<BackingTrackTitle />} {...props}>
         <SimpleForm>
             <DisabledInput source="id" />
-            <TextInput source="name" validate={required()} />
+            <TextInput source="name" validate={required()} fullWidth autoFocus />
             <NumberInput source="tempo" validate={required()} step={5} />
-            <TextInput source="chord_info" />
+            <TextInput source="chord_info" fullWidth />
             <FileInput source="file" label="Backing track (mp3)" accept="audio/mp3">
                 <FileField source="src" title="title" />
             </FileInput>
@@ -68,9 +67,9 @@ export const BackingTrackEdit = props => (
 export const BackingTrackCreate = props => (
     <Create title="Create a Backing Track" {...props}>
         <SimpleForm>
-            <TextInput source="name" validate={required()} />
+            <TextInput source="name" validate={required()} fullWidth autoFocus />
             <NumberInput source="tempo" validate={required()} defaultValue={100} step={5} />
-            <TextInput source="chord_info" />
+            <TextInput source="chord_info" fullWidth />
             <FileInput source="file" label="Backing track (mp3)" accept="audio/mp3">
                 <FileField source="src" title="title" />
             </FileInput>

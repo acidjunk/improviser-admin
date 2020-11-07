@@ -1,10 +1,8 @@
 import { Label } from "@material-ui/icons";
 import React from "react";
 import {
-    BooleanField,
     Create,
     Datagrid,
-    DateField,
     DeleteButton,
     DisabledInput,
     Edit,
@@ -80,7 +78,7 @@ export const TagEdit = props => (
     <Edit title={<TagTitle />} {...props}>
         <SimpleForm>
             <DisabledInput source="id" />
-            <TextInput source="name" validate={required()} />
+            <TextInput source="name" validate={required()} autoFocus />
         </SimpleForm>
     </Edit>
 );
@@ -88,7 +86,7 @@ export const TagEdit = props => (
 export const TagCreate = props => (
     <Create title="Create a Effect" {...props}>
         <SimpleForm>
-            <TextInput source="name" validate={required()} />
+            <TextInput source="name" validate={required()} autoFocus />
         </SimpleForm>
     </Create>
 );

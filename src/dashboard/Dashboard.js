@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { GET_LIST, GET_MANY, Responsive, withDataProvider } from "react-admin";
+import { GET_LIST, Responsive, withDataProvider } from "react-admin";
 import { connect } from "react-redux";
 import compose from "recompose/compose";
 
