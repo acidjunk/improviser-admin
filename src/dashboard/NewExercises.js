@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { translate } from "react-admin";
 import { Link } from "react-router-dom";
-import compose from "recompose/compose";
+import { compose } from "redux";
 
 import { ExerciseIcon } from "../Exercises";
 import CardIcon from "./CardIcon";

@@ -1,6 +1,6 @@
 import { parse } from "query-string";
 import React from "react";
-import { Create, DisabledInput, Edit, ReferenceInput, SelectInput, SimpleForm, required } from "react-admin";
+import { Create, Edit, ReferenceInput, SelectInput, SimpleForm, TextInput, required } from "react-admin";
 
 const ExercisesToTagsTitle = ({ record }) => {
     return <span>ExercisesToTags {record ? `"${record.id}"` : ""}</span>;
@@ -12,7 +12,7 @@ const redirect = (basePath, id, data) =>
 export const ExercisesToTagsEdit = props => (
     <Edit title={<ExercisesToTagsTitle />} {...props}>
         <SimpleForm redirect={redirect}>
-            <DisabledInput source="id" />
+            <TextInput source="id" disabled />
             <ReferenceInput source="tag_id" reference="tags" perPage={100} validate={required()} autoFocus>
                 <SelectInput optionText="name" />
             </ReferenceInput>

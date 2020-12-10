@@ -1,6 +1,6 @@
 import { parse } from "query-string";
 import React from "react";
-import { Create, DisabledInput, Edit, ReferenceInput, SelectInput, SimpleForm, required } from "react-admin";
+import { Create, Edit, ReferenceInput, SelectInput, SimpleForm, TextInput, required } from "react-admin";
 
 const RiffsToTagsTitle = ({ record }) => {
     return <span>RiffsToTags {record ? `"${record.id}"` : ""}</span>;
@@ -11,7 +11,7 @@ const redirect = (basePath, id, data) => `/riffs/${data.riff_id}/show/riffs-to-t
 export const RiffsToTagsEdit = props => (
     <Edit title={<RiffsToTagsTitle />} {...props}>
         <SimpleForm redirect={redirect}>
-            <DisabledInput source="id" />
+            <TextInput source="id" disabled />
             <ReferenceInput source="tag_id" reference="tags" perPage={100} validate={required()} autoFocus>
                 <SelectInput optionText="name" />
             </ReferenceInput>

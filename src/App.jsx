@@ -1,3 +1,4 @@
+import polyglotI18nProvider from "ra-i18n-polyglot";
 import React, { Component } from "react";
 import { Admin, Resource } from "react-admin";
 
@@ -14,16 +15,16 @@ import { TagCreate, TagEdit, TagIcon, TagList, TagShow } from "./Tags";
 import { adminTheme } from "./Theme";
 import { UserCreate, UserEdit, UserIcon, UserList } from "./Users";
 
-const i18nProvider = locale => {
+const i18nProvider = polyglotI18nProvider(locale => {
     if (locale === "nl") {
         return import("./i18n/nl").then(messages => messages.default);
     }
 
     // Always fallback on english
     return englishMessages;
-};
+});
 
-class App extends Component {
+export default class App extends Component {
     render() {
         return (
             <Admin
@@ -72,4 +73,3 @@ class App extends Component {
         );
     }
 }
-export default App;

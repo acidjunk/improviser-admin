@@ -6,7 +6,6 @@ import {
     Datagrid,
     DateField,
     DeleteButton,
-    DisabledInput,
     Edit,
     EditButton,
     FileField,
@@ -52,7 +51,7 @@ const BackingTrackTitle = ({ record }) => {
 export const BackingTrackEdit = props => (
     <Edit title={<BackingTrackTitle />} {...props}>
         <SimpleForm>
-            <DisabledInput source="id" />
+            <TextInput source="id" disabled />
             <TextInput source="name" validate={required()} fullWidth autoFocus />
             <NumberInput source="tempo" validate={required()} step={5} />
             <TextInput source="chord_info" fullWidth />

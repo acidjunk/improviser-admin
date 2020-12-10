@@ -15,7 +15,6 @@ import {
     Datagrid,
     DateField,
     DeleteButton,
-    DisabledInput,
     Edit,
     EditButton,
     Filter,
@@ -183,7 +182,7 @@ export const ExerciseShow = props => (
 export const ExerciseEdit = props => (
     <Edit title={<ExerciseTitle />} {...props}>
         <SimpleForm>
-            <DisabledInput source="id" />
+            <TextInput source="id" disabled />
             <TextInput source="name" validate={required()} fullWidth autoFocus />
             <BooleanField source="is_public" />
         </SimpleForm>

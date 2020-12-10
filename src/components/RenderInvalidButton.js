@@ -1,10 +1,10 @@
 import Button from "@material-ui/core/Button";
+import { push as pushAction } from "connected-react-router";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { showNotification as showNotificationAction } from "react-admin";
 import { UPDATE } from "react-admin";
 import { connect } from "react-redux";
-import { push as pushAction } from "react-router-redux";
 
 import { uploadDataProvider } from "../dataProvider";
 

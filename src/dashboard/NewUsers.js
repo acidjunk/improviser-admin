@@ -10,7 +10,7 @@ import React from "react";
 import { translate } from "react-admin";
 import Gravatar from "react-gravatar";
 import { Link } from "react-router-dom";
-import compose from "recompose/compose";
+import { compose } from "redux";
 
 import CardIcon from "./CardIcon";
 

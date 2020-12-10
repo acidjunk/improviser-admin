@@ -5,7 +5,6 @@ import {
     Create,
     Datagrid,
     DateField,
-    DisabledInput,
     Edit,
     Filter,
     List,
@@ -49,7 +48,7 @@ const UserTitle = ({ record }) => {
 export const UserEdit = props => (
     <Edit title={<UserTitle />} {...props}>
         <SimpleForm>
-            <DisabledInput source="id" />
+            <TextInput source="id" disabled />
             <TextInput source="username" autoFocus />
             <TextInput source="email" validate={required()} fullWidth />
             <TextInput source="first_name" />

@@ -11,7 +11,6 @@ import {
     Datagrid,
     DateField,
     DeleteButton,
-    DisabledInput,
     Edit,
     EditButton,
     Filter,
@@ -184,7 +183,7 @@ export const RiffShow = props => (
 export const RiffEdit = props => (
     <Edit title={<RiffTitle />} {...props}>
         <SimpleForm redirect="list">
-            <DisabledInput source="id" />
+            <TextInput source="id" disabled />
             <BooleanInput source="render_valid" />
             <TextInput source="name" validate={required()} fullWidth autoFocus />
             <TextInput source="notes" validate={required()} fullWidth />
