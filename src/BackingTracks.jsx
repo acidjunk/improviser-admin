@@ -34,6 +34,7 @@ export const BackingTrackList = props => (
         <Datagrid rowClick="show">
             <TextField source="name" />
             <TextField source="chord_info" />
+            <TextField source="number_of_bars" label="Loop Length" />
             <NumberField source="tempo" />
             <TextField source="file" />
             <DateField source="modified_at" />
@@ -56,6 +57,13 @@ export const BackingTrackEdit = props => (
             <TextInput source="name" validate={required()} fullWidth autoFocus />
             <NumberInput source="tempo" validate={required()} step={5} />
             <TextInput source="chord_info" fullWidth />
+            <NumberInput
+                source="number_of_bars"
+                fullWidth
+                validate={required()}
+                step={1}
+                label="Loop Length (in bars)"
+            />
             <FileInput source="file" label="Backing track (mp3)" accept="audio/mp3">
                 <FileField source="src" title="title" />
             </FileInput>
@@ -70,6 +78,13 @@ export const BackingTrackCreate = props => (
             <TextInput source="name" validate={required()} fullWidth autoFocus />
             <NumberInput source="tempo" validate={required()} defaultValue={100} step={5} />
             <TextInput source="chord_info" fullWidth />
+            <NumberInput
+                source="number_of_bars"
+                fullWidth
+                validate={required()}
+                step={1}
+                label="Loop Length (in bars)"
+            />
             <FileInput source="file" label="Backing track (mp3)" accept="audio/mp3">
                 <FileField source="src" title="title" />
             </FileInput>
