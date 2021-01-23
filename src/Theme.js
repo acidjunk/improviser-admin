@@ -4,13 +4,13 @@ import { createMuiTheme } from "@material-ui/core/styles";
 export const adminTheme = createMuiTheme({
     palette: {
         primary: {
-            main: "#4527A0"
+            main: "#017D73"
         },
         secondary: {
-            main: "#b71c1c"
+            main: "#38a5f8"
         },
         error: red,
-        contrastThreshold: 3,
+        contrastThreshold: 1,
         tonalOffset: 0.2
     }
 });

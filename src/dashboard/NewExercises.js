@@ -44,7 +44,7 @@ const styles = theme => ({
 
 const NewExercises = ({ exercises = [], nb, translate, classes }) => (
     <div className={classes.main}>
-        <CardIcon Icon={ExerciseIcon} bgColor="#4caf50" />
+        <CardIcon Icon={ExerciseIcon} bgColor="#017D73" />
         <Card className={classes.card}>
             <Typography className={classes.title} color="textSecondary">
                 {translate("pos.dashboard.new_exercises")}

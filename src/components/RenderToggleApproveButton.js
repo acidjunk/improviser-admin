@@ -8,27 +8,32 @@ import { push as pushAction } from "react-router-redux";
 
 import { uploadDataProvider } from "../dataProvider";
 
-class RenderInvalidButton extends Component {
+class RenderToggleApproveButton extends Component {
     handleClick = () => {
         const { push, record, showNotification } = this.props;
-        const updatedRecord = { ...record, render_valid: !record.render_valid };
-        uploadDataProvider(UPDATE, "riffs", { id: record.id, data: updatedRecord })
+        const updatedRecord = { ...record, approved: !record.approved };
+        uploadDataProvider(UPDATE, "backing-tracks", { id: record.id, data: updatedRecord })
             .then(() => {
-                showNotification("Riff render status toggled");
-                push("/riffs");
+                showNotification("Approve status toggled");
+                push("/backing-tracks");
             })
             .catch(e => {
                 console.error(e);
-                showNotification("Error: riff update failed", "warning");
+                showNotification("Error: backing-track update failed", "warning");
             });
     };
 
     render() {
-        return <Button onClick={this.handleClick}>Toggle render status</Button>;
+        const { record } = this.props;
+        return (
+            <Button color="primary" size="small" variant="contained" onClick={this.handleClick}>
+                {record.approved ? "stop" : "approve"}
+            </Button>
+        );
     }
 }
 
-RenderInvalidButton.propTypes = {
+RenderToggleApproveButton.propTypes = {
     push: PropTypes.func,
     record: PropTypes.object,
     showNotification: PropTypes.func
@@ -37,4 +42,4 @@ RenderInvalidButton.propTypes = {
 export default connect(null, {
     showNotification: showNotificationAction,
     push: pushAction
-})(RenderInvalidButton);
+})(RenderToggleApproveButton);

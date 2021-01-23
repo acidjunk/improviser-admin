@@ -1,6 +1,7 @@
 import { LibraryMusic } from "@material-ui/icons";
 import React from "react";
 import {
+    BooleanField,
     BooleanInput,
     Create,
     Datagrid,
@@ -13,14 +14,17 @@ import {
     FileInput,
     Filter,
     List,
+    LongTextInput,
     NumberField,
     NumberInput,
-    ShowButton,
     SimpleForm,
     TextField,
     TextInput,
     required
 } from "react-admin";
+
+import RenderToggleApproveButton from "./components/RenderToggleApproveButton";
+
 export const BackingTrackIcon = LibraryMusic;
 
 const BackingTrackFilter = props => (
@@ -34,12 +38,15 @@ export const BackingTrackList = props => (
         <Datagrid rowClick="show">
             <TextField source="name" />
             <TextField source="chord_info" />
+            <TextField source="intro_number_of_bars" label="Intro" />
             <TextField source="number_of_bars" label="Loop Length" />
+            <TextField source="coda_number_of_bars" label="Coda" />
             <NumberField source="tempo" />
             <TextField source="file" />
             <DateField source="modified_at" />
+            <BooleanField source="approved" />
             <DateField source="approved_at" />
-            <ShowButton />
+            <RenderToggleApproveButton source="approved" />
             <EditButton />
             <DeleteButton />
         </Datagrid>
@@ -56,7 +63,7 @@ export const BackingTrackEdit = props => (
             <DisabledInput source="id" />
             <TextInput source="name" validate={required()} fullWidth autoFocus />
             <NumberInput source="tempo" validate={required()} step={5} />
-            <TextInput source="chord_info" fullWidth />
+            <LongTextInput source="chord_info" fullWidth />
             <NumberInput
                 source="number_of_bars"
                 fullWidth
@@ -64,10 +71,23 @@ export const BackingTrackEdit = props => (
                 step={1}
                 label="Loop Length (in bars)"
             />
+            <NumberInput
+                source="intro_number_of_bars"
+                fullWidth
+                label="Backing track intro in bars. Only touch this when the backing track has an intro before the main loop"
+                validate={required()}
+            />
+            <NumberInput
+                source="coda_number_of_bars"
+                fullWidth
+                label="Backing track outtro in bars. Only touch this when the backing track has some extra bars after the main loop"
+                validate={required()}
+            />
             <FileInput source="file" label="Backing track (mp3)" accept="audio/mp3">
                 <FileField source="src" title="title" />
             </FileInput>
             <BooleanInput source="approved" />
+            <TextField source="file" label="File name on disk" fullWidth />
         </SimpleForm>
     </Edit>
 );
@@ -77,13 +97,27 @@ export const BackingTrackCreate = props => (
         <SimpleForm>
             <TextInput source="name" validate={required()} fullWidth autoFocus />
             <NumberInput source="tempo" validate={required()} defaultValue={100} step={5} />
-            <TextInput source="chord_info" fullWidth />
+            <LongTextInput source="chord_info" fullWidth />
             <NumberInput
                 source="number_of_bars"
                 fullWidth
                 validate={required()}
                 step={1}
                 label="Loop Length (in bars)"
+            />
+            <NumberInput
+                source="intro_number_of_bars"
+                fullWidth
+                defaultValue={0}
+                label="Backing track intro in bars. Only touch this when the backing track has an intro before the main loop"
+                validate={required()}
+            />
+            <NumberInput
+                source="coda_number_of_bars"
+                fullWidth
+                defaultValue={0}
+                label="Backing track outtro in bars. Only touch this when the backing track has some extra bars after the main loop"
+                validate={required()}
             />
             <FileInput source="file" label="Backing track (mp3)" accept="audio/mp3">
                 <FileField source="src" title="title" />

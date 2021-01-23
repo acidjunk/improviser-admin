@@ -42,7 +42,7 @@ const styles = theme => ({
 
 const NewUsers = ({ users = [], nb, translate, classes }) => (
     <div className={classes.main}>
-        <CardIcon Icon={CustomerIcon} bgColor="#4caf50" />
+        <CardIcon Icon={CustomerIcon} bgColor="#017D73" />
         <Card className={classes.card}>
             <Typography className={classes.title} color="textSecondary">
                 {translate("pos.dashboard.new_users")}
