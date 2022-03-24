@@ -38,6 +38,7 @@ export const BackingTrackList = props => (
         <Datagrid rowClick="show">
             <TextField source="name" />
             <TextField source="chord_info" />
+            <TextField source="count_in" />
             <TextField source="intro_number_of_bars" label="Intro" />
             <TextField source="number_of_bars" label="Loop Length" />
             <TextField source="coda_number_of_bars" label="Coda" />
@@ -65,11 +66,17 @@ export const BackingTrackEdit = props => (
             <NumberInput source="tempo" validate={required()} step={5} />
             <LongTextInput source="chord_info" fullWidth />
             <NumberInput
+                source="count_in"
+                fullWidth
+                label="Count in before real music in seconds"
+                validate={required()}
+            />
+            <NumberInput
                 source="number_of_bars"
                 fullWidth
                 validate={required()}
                 step={1}
-                label="Loop Length (in bars)"
+                label="Total number of bars (with intro + outro)"
             />
             <NumberInput
                 source="intro_number_of_bars"
@@ -99,11 +106,18 @@ export const BackingTrackCreate = props => (
             <NumberInput source="tempo" validate={required()} defaultValue={100} step={5} />
             <LongTextInput source="chord_info" fullWidth />
             <NumberInput
+                source="count_in"
+                fullWidth
+                defaultValue={1.5}
+                label="Count in before real music in seconds"
+                validate={required()}
+            />
+            <NumberInput
                 source="number_of_bars"
                 fullWidth
                 validate={required()}
                 step={1}
-                label="Loop Length (in bars)"
+                label="Total number of bars (with intro + outro)"
             />
             <NumberInput
                 source="intro_number_of_bars"

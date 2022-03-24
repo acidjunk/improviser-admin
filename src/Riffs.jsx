@@ -102,6 +102,8 @@ export const RiffList = props => (
             <NumberField source="number_of_bars" />
             <TextField source="chord" />
             <BooleanField source="render_valid" />
+            <BooleanField source="scale_trainer_enabled" />
+            <BooleanField source="is_public" />
             {/*<TextField source="image_info" sortable={false} />*/}
             <TagsField />
             <DateField source="created_at" />
@@ -155,6 +157,8 @@ export const RiffShow = props => (
                 <TagsField label="Tags" />
                 <SVGField label="Image" />
                 <DateField source="created_at" />
+                <TextField source="created_by" />
+                <BooleanField source="is_public" />
                 <DateField source="render_date" />
                 <TextField source="image_info" />
             </Tab>
@@ -197,6 +201,8 @@ export const RiffEdit = props => (
             <TextInput source="chord" />
             <TextInput source="chord_info" />
             <BooleanInput source="multi_chord" />
+            <BooleanInput source="scale_trainer_enabled" />
+            <BooleanInput source="is_public" />
         </SimpleForm>
     </Edit>
 );
@@ -215,6 +221,8 @@ export const RiffCreate = props => (
             <TextInput source="chord" />
             <TextInput source="chord_info" />
             <BooleanInput source="multi_chord" />
+            <BooleanInput source="scale_trainer_enabled" />
+            <BooleanInput source="is_public" defaultValue={true} />
         </SimpleForm>
     </Create>
 );
